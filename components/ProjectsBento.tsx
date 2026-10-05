@@ -173,8 +173,14 @@ export default function ProjectsBento() {
   const activeProj = projectsData[selectedIdx];
 
   const tabsRef = useRef<(HTMLButtonElement | null)[]>([]);
+  const isFirstMount = useRef(true);
 
   useEffect(() => {
+    if (isFirstMount.current) {
+      isFirstMount.current = false;
+      return;
+    }
+
     const currentTab = tabsRef.current[selectedIdx];
     if (currentTab) {
       currentTab.scrollIntoView({
